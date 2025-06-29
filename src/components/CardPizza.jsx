@@ -1,11 +1,10 @@
-import React from 'react'
 import { formatMiles } from '../utils/formatMiles'
 
 const CardPizza = (props) => {
   return (
     <div className="col">
       <div className="card h-100 m-0 p-0">
-        <img src={props.pizza.img} className="card-img-top w-100" alt="Pizza"/>
+        <img src={props.pizza.img} alt={`Pizza ${props.pizza.name}`} className="card-img-top w-100"/>
         <div className="card-body p-0">
           <h5 className="card-title fs-5 fw-bold m-3">Pizza {props.pizza.name}</h5>
           <hr/>
@@ -26,5 +25,3 @@ const CardPizza = (props) => {
 }
 
 export default CardPizza
-
-//<p className="text-center fs-6 fw-normal">🍕 {props.pizza.ingredients.filter(Boolean).join(', ')}</p>
