@@ -1,8 +1,8 @@
 import { pizzas } from '../data/pizzas'
-import { formatMiles } from '../utils/formatMiles';
+import { formatMiles } from '../utils/formatMiles'
 import { useState } from 'react'
 
-const Cart = () => {
+const CartPage = () => {
   const pizzaCart = pizzas.map(pizza => ({...pizza, quantity: 1}))
 
   const [cart, setCart] =useState(pizzaCart)
@@ -29,7 +29,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="content">
+    <main className="content">
       <div className="container mt-4" style={{maxWidth: "600px"}}>
         <h5 className="mb-4 fw-bold">Detalles del pedido:</h5>
         {cart.map(pizza => (
@@ -47,8 +47,8 @@ const Cart = () => {
         <h5 className="mt-4 fw-bold">Total: ${formatMiles(total)}</h5>
         <button className="btn btn-dark mt-2 mb-4">Pagar</button>
       </div>
-    </div>
+    </main>
   )
 }
 
-export default Cart
+export default CartPage

@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
-import Header from './Header'
-import CardPizza from './CardPizza'
+import Header from '../components/Header'
+import CardPizza from '../components/CardPizza'
 
-const Home = () => {
-  const [pizzas, setPizzas] = useState([]);
-  const [error, setError] = useState(null);
+const HomePage = () => {
+const [pizzas, setPizzas] = useState([])
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    consultarApi();
-  }, []);
+    consultarApi()
+  }, [])
 
   const consultarApi = async () => {
     try{
-      const url = "http://localhost:5000/api/pizzas";
-      const response = await fetch(url);
-      const data = await response.json();
-      setPizzas(data);
+      const url = "http://localhost:5000/api/pizzas"
+      const response = await fetch(url)
+      const data = await response.json()
+      setPizzas(data)
     }
     catch(e){
-      setError("¡Error al cargar las pizzas!");
+      setError("¡Error al cargar las pizzas!")
     }
-  };
+  }
 
     if(error){
     return(
@@ -29,8 +29,8 @@ const Home = () => {
           <h3 className="fw-bold">{error}</h3>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
     if(!pizzas){
     return(
@@ -39,19 +39,19 @@ const Home = () => {
           <h3 className="fw-bold">Cargando pizzas...</h3>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <div>
+    <main>
       <Header/>
       <div className="container my-4 mb-5 mt-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {pizzas.map(pizza => (<CardPizza key={pizza.id} pizza={pizza}/>))}
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
-export default Home
+export default HomePage

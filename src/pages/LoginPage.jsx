@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
-const Register = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
@@ -13,7 +12,7 @@ const Register = () => {
     setSuccess("")
     setError("")
 
-    if(!email.trim() || !password.trim() || !confirmPassword.trim()){
+    if(!email.trim() || !password.trim()){
       setError("Todos los campos son obligatorios")
       return
     }
@@ -23,17 +22,13 @@ const Register = () => {
         return
     }
 
-    if(password !== confirmPassword){
-      setError("Las contraseñas no coinciden")
-      return
-    }
-    setSuccess("Formulario enviado")
+    setSuccess("Login correcto")
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100 px-3">
+    <main className="d-flex justify-content-center align-items-center min-vh-100 px-3">
       <div className="border p-4 rounded shadow w-100" style={{ maxWidth: "600px" }}>
-        <h2 className="fw-bold text-center mb-4">Registro</h2>
+        <h2 className="fw-bold text-center mb-4">Login</h2>
         <form onSubmit={validarDatos}>
             {(error || success) && <div className={`alert ${error ? "alert-danger" : "alert-success"}`}>{error || success}</div>}
 
@@ -51,18 +46,11 @@ const Register = () => {
               )}></input>
             </div>
 
-            <div className="mb-3">
-              <label for="confirm-password" className="fw-bold">Confirmar contraseña</label>
-              <input type="password" className="form-control" id="confirm-password" placeholder="Repite la contraseña" onChange={(e) => (
-                setConfirmPassword(e.target.value)
-              )}></input>
-            </div>
-
             <button type='submit' className="btn btn-primary btn-sm">Enviar</button>
         </form>
       </div>
-    </div>
+    </main>
   )
 }
 
-export default Register
+export default LoginPage

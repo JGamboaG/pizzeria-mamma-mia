@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react'
 import { formatMiles } from '../utils/formatMiles'
 
-const Pizza = () => {
-  const [pizza, setPizza] = useState(null);
-  const [error, setError] = useState(null);
+const PizzaPage = () => {
+  const [pizza, setPizza] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    consultarApi();
-  }, []);
+    consultarApi()
+  }, [])
 
   const consultarApi = async () => {
     try{
-      const url = "http://localhost:5000/api/pizzas/p001";
-      const response = await fetch(url);
-      const data = await response.json();
-      setPizza(data);
+      const url = "http://localhost:5000/api/pizzas/p001"
+      const response = await fetch(url)
+      const data = await response.json()
+      setPizza(data)
     }
     catch(e){
-      setError("¡Error al cargar la pizza!");
+      setError("¡Error al cargar la pizza!")
     }
-  };
+  }
 
   if(error){
     return(
@@ -28,8 +28,8 @@ const Pizza = () => {
           <h3 className="fw-bold">{error}</h3>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   if(!pizza){
     return(
@@ -38,11 +38,11 @@ const Pizza = () => {
           <h3 className="fw-bold">Cargando pizza...</h3>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <div className="container my-4 content">
+    <main className="container my-4 content">
       <div className="card shadow-sm">
         <div className="row g-0 align-items-stretch">
           <div className="col-12 col-md-5 d-flex align-items-stretch">
@@ -59,15 +59,15 @@ const Pizza = () => {
               <div className="mt-4 text-center text-md-start">
                 <h4 className="mt-3 fw-bold">Precio: ${formatMiles(pizza.price)}</h4>
                 <div className="d-flex justify-content-center justify-content-md-start mt-2">
-                  <button className="btn btn-danger mt-3">Añadir al carrito</button>
+                  <button className="btn btn-danger mt-3 btn-sm">Añadir al carrito</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    </main>
+  )
+}
 
-export default Pizza;
+export default PizzaPage
