@@ -1,6 +1,9 @@
+import { useCart } from '../context/CartContext'
 import { formatMiles } from '../utils/formatMiles'
 
 const CardPizza = (props) => {
+  const {addToCart} = useCart()
+
   return (
     <div className="col">
       <div className="card h-100 m-0 p-0">
@@ -17,7 +20,7 @@ const CardPizza = (props) => {
         </div>
         <div className="d-flex justify-content-around p-4">
           <button className="btn btn-outline-secondary btn-sm mx-1">Ver Más 👀</button>
-          <button className="btn btn-dark btn-sm mx-1">Añadir 🛒</button>
+          <button className="btn btn-dark btn-sm mx-1" onClick={() => addToCart(props.pizza)}>Añadir 🛒</button>
         </div>
       </div>
     </div>

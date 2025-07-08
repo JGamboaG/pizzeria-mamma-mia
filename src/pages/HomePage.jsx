@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import CardPizza from '../components/CardPizza'
 
 const HomePage = () => {
-const [pizzas, setPizzas] = useState([])
+  const [pizzas, setPizzas] = useState([])
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const [pizzas, setPizzas] = useState([])
     }
   }
 
-    if(error){
+  if(error){
     return(
       <div className="d-flex justify-content-center align-items-center content">
         <div className="text-center">
@@ -32,7 +32,7 @@ const [pizzas, setPizzas] = useState([])
     )
   }
 
-    if(!pizzas){
+  if(!pizzas){
     return(
       <div className="d-flex justify-content-center align-items-center content">
         <div className="text-center">

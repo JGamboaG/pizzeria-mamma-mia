@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { formatMiles } from '../utils/formatMiles'
+import { useCart } from '../context/CartContext'
 
 const Navbar = () => {
-  const total = 25000
+  const {total} = useCart()
   const token = false
   return (
     <nav className="navbar navbar-expand-lg navbar-dark text-white bg-color">
