@@ -33,14 +33,14 @@ const LoginPage = () => {
             {(error || success) && <div className={`alert ${error ? "alert-danger" : "alert-success"}`}>{error || success}</div>}
 
             <div className="mb-3">
-              <label for="email" className="fw-bold">Email</label>
+              <label htmlFor="email" className="fw-bold">Email</label>
               <input type="email" className="form-control" placeholder="Ingresa tu correo" onChange={(e) => (
                 setEmail(e.target.value)
               )}></input>
             </div>
 
             <div className="mb-3">
-              <label for="password" className="fw-bold">Contraseña</label>
+              <label htmlFor="password" className="fw-bold">Contraseña</label>
               <input type="password" className="form-control" id="password" placeholder="Contraseña" onChange={(e) => (
                 setPassword(e.target.value)
               )}></input>

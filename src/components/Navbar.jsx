@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { formatMiles } from '../utils/formatMiles'
 import { useCart } from '../context/CartContext'
+import { useUser } from '../context/UserContext'
 
 const Navbar = () => {
   const {total} = useCart()
-  const token = false
+  const {token, logout} = useUser()
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark text-white bg-color">
       <div className="container d-flex justify-content-between">
@@ -19,7 +21,7 @@ const Navbar = () => {
                 <button type="button" className="btn btn-outline-light btn-sm fs-6">🔓 Profile</button>
               </Link>
               <Link to="/">  
-                <button type="button" className="btn btn-outline-light btn-sm fs-6">🔓 Logout</button>
+                <button type="button" className="btn btn-outline-light btn-sm fs-6" onClick={() => logout()}>🔓 Logout</button>
               </Link>
             </>
           ) : (

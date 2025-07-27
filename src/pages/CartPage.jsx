@@ -1,8 +1,10 @@
 import { useCart } from '../context/CartContext'
+import { useUser } from '../context/UserContext'
 import { formatMiles } from '../utils/formatMiles'
 
 const CartPage = () => {
   const {cart, total, increment, decrement} = useCart()
+  const {token} = useUser()
 
   const capitalizeFirstLetter = (str) => {
     if (!str) return ""
@@ -26,7 +28,7 @@ const CartPage = () => {
           </div>
         ))}
         <h5 className="mt-4 fw-bold">Total: ${formatMiles(total)}</h5>
-        <button className="btn btn-dark mt-2 mb-4">Pagar</button>
+        <button className="btn btn-dark mt-2 mb-4" disabled={!token}>Pagar</button>
       </div>
     </main>
   )

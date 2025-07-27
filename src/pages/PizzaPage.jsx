@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react'
 import { formatMiles } from '../utils/formatMiles'
+import { useParams } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
 const PizzaPage = () => {
+  const {addToCart} = useCart()
+  const {id} = useParams()
   const [pizza, setPizza] = useState(null)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     consultarApi()
-  }, [])
+  }, [id])
 
   const consultarApi = async () => {
+    const url = "http://localhost:5000/api/pizzas"
     try{
-      const url = "http://localhost:5000/api/pizzas/p001"
-      const response = await fetch(url)
+      const response = await fetch(`${url}/${id}`)
       const data = await response.json()
       setPizza(data)
     }
@@ -59,7 +63,7 @@ const PizzaPage = () => {
               <div className="mt-4 text-center text-md-start">
                 <h4 className="mt-3 fw-bold">Precio: ${formatMiles(pizza.price)}</h4>
                 <div className="d-flex justify-content-center justify-content-md-start mt-2">
-                  <button className="btn btn-danger mt-3 btn-sm">Añadir al carrito</button>
+                  <button className="btn btn-danger mt-3 btn-sm" onClick={()=> addToCart(pizza)}>Añadir al carrito</button>
                 </div>
               </div>
             </div>
