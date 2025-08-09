@@ -31,7 +31,7 @@ const CartProvider = ({children}) => {
   const total = cart.reduce((acumulador, pizza) => acumulador + pizza.price * pizza.quantity,0)
 
   return(
-    <CartContext.Provider value={{total, cart, addToCart, increment, decrement}}>
+    <CartContext.Provider value={{total, cart, addToCart, increment, decrement, setCart}}>
       {children}
     </CartContext.Provider>
   )

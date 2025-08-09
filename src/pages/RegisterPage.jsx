@@ -1,15 +1,18 @@
 import { useState } from 'react'
+import { useUser } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterPage = () => {
+  const { register } = useUser()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const navigate = useNavigate()
 
-  const validarDatos = (e) =>{
+  const validarDatos = async (e) =>{
     e.preventDefault()
-
     setSuccess("")
     setError("")
 
@@ -27,7 +30,14 @@ const RegisterPage = () => {
       setError("Las contraseñas no coinciden")
       return
     }
-    setSuccess("Formulario enviado")
+
+    try{
+      await register(email, password)
+      setSuccess("Registro exitoso")
+      navigate("/")
+    } catch(err){
+      setError(err.message || "Error en el registro")
+    }
   }
 
   return (

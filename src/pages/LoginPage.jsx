@@ -1,14 +1,17 @@
 import { useState } from 'react'
+import { useUser } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
+  const { login } = useUser()
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  const validarDatos = (e) =>{
+  const validarDatos = async (e) =>{
     e.preventDefault()
-
     setSuccess("")
     setError("")
 
@@ -22,7 +25,14 @@ const LoginPage = () => {
         return
     }
 
-    setSuccess("Login correcto")
+    try{
+      await login(email, password)
+      setSuccess("Login correcto")
+      navigate("/")
+
+    } catch(err){
+      setError("Error al iniciar sesión")
+    }
   }
 
   return (

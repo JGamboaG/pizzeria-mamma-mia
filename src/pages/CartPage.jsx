@@ -1,14 +1,39 @@
+import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { useUser } from '../context/UserContext'
 import { formatMiles } from '../utils/formatMiles'
 
 const CartPage = () => {
-  const {cart, total, increment, decrement} = useCart()
-  const {token} = useUser()
+  const { cart, total, increment, decrement, setCart } = useCart()
+  const { token } = useUser()
+  const [message, setMessage] = useState("")
+
 
   const capitalizeFirstLetter = (str) => {
     if (!str) return ""
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  }
+
+  const handleCheckout = async () => {
+    setMessage("")
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ items: cart })
+      })
+
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || "Error al procesar el pago")
+
+      setMessage("Compra realizada con éxito")
+      setCart([])
+    } catch (error) {
+      setMessage(error.message)
+    }
   }
 
   return (
@@ -28,7 +53,12 @@ const CartPage = () => {
           </div>
         ))}
         <h5 className="mt-4 fw-bold">Total: ${formatMiles(total)}</h5>
-        <button className="btn btn-dark mt-2 mb-4" disabled={!token}>Pagar</button>
+        <button className="btn btn-dark mt-2 mb-4" disabled={!token || total === 0} onClick={handleCheckout}>Pagar</button>
+        {message && (
+          <div className={`alert ${message.includes("éxito") ? "alert-success" : "alert-danger"}`}>
+            {message}
+          </div>
+        )}
       </div>
     </main>
   )

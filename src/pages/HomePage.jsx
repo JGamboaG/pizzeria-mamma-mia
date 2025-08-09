@@ -32,7 +32,7 @@ const HomePage = () => {
     )
   }
 
-  if(!pizzas){
+  if(pizzas.length === 0 && !error){
     return(
       <div className="d-flex justify-content-center align-items-center content">
         <div className="text-center">
